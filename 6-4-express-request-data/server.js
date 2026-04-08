@@ -128,8 +128,8 @@ app.get("/profile/:first/:last", (req, res) => {
 
 // TODO-4: Param middleware
 app.param("userId", (req, res, next, userId) => {
-  const userIdNum = Number(userId);
-  if (!Number.isFinite(userIdNum) || userIdNum <= 0) {
+  const userIdNum = parseInt(userId, 10);
+  if (isNaN(userIdNum) || userIdNum <= 0) {
     return res
       .status(400)
       .json({ ok: false, error: "userId must be positive number" });
